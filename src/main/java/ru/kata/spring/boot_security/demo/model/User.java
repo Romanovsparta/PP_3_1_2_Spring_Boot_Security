@@ -1,13 +1,13 @@
 package ru.kata.spring.boot_security.demo.model;
 
-import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import javax.persistence.*;
-import java.util.Collection;
-import java.util.List;
+import org.springframework.security.core.GrantedAuthority;
 import java.util.stream.Collectors;
+import java.util.Collection;
+import javax.persistence.*;
+import java.util.List;
+import lombok.Data;
 
 @Data
 @Entity
@@ -16,10 +16,13 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String username;
+    private String firstName;
+    private String lastName;
+    private byte age;
     private String password;
     private String role;
 
-    @ManyToMany(cascade=CascadeType.MERGE)
+    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.MERGE)
     @JoinTable(
             name="user_role",
             joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
@@ -53,21 +56,21 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }

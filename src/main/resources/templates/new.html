@@ -10,8 +10,20 @@
 <h1>Создать нового пользователя</h1>
 <form th:method="POST" th:action="@{/admin}" th:object="${user}">
 <div class="mb-3">
-<label for="username" class="form-label">Имя: </label>
+<label for="username" class="form-label">Идентификатор пользователя (username): </label>
 <input class="form-control" type="text" th:field="*{username}" id="username">
+</div>
+<div class="mb-3">
+<label for="firstName" class="form-label">Имя: </label>
+<input class="form-control" type="text" th:field="*{firstName}" id="firstName">
+</div>
+<div class="mb-3">
+<label for="lastName" class="form-label">Фамилия: </label>
+<input class="form-control" type="text" th:field="*{lastName}" id="lastName">
+</div>
+<div class="mb-3">
+<label for="age" class="form-label">Возраст: </label>
+<input class="form-control" type="text" th:field="*{age}" id="age">
 </div>
 <div class="mb-3">
 <label for="password" class="form-label">Пароль: </label>
